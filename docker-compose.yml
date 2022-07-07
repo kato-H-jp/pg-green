@@ -1,0 +1,22 @@
+version: '2'
+services:
+  node:
+    image: 'node:16.15.1'
+    user: 'node'
+    ## コンテナ内でのカレントディレクトリの指定
+    working_dir: /code
+    environment:
+      - NODE_ENV=production
+    restart: always
+    volumes:
+      - .:/code
+      - .:/workspace:cached
+      - pjgreen-node-modules:/workspace/node_modules
+    expose:
+      - '8081'
+    command: 'npm start'
+
+## 環境変数file
+# env_file: .env
+volumes:
+  pjgreen-node-modules: {}
